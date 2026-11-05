@@ -1,0 +1,97 @@
+CivicSathi AI - sanitized build log
+Generated: 2026-11-05T15:05:18Z
+Node: v22.22.2  npm: 10.9.7
+Secrets, API keys, tokens, request IDs and local paths removed.
+
+== [1] Server dependencies (npm ls --depth=0) ==
+civicsathi-server@1.0.0 <project>/server
++-- @anthropic-ai/sdk@0.30.1
++-- @google/generative-ai@0.21.0
++-- bcryptjs@2.4.3
++-- cors@2.8.6
++-- dotenv@16.6.1
++-- express-rate-limit@7.5.1
++-- express@4.22.3
++-- helmet@7.2.0
++-- jsonwebtoken@9.0.3
++-- mongoose@8.24.8
+`-- multer@1.4.5-lts.2
+
+
+== [2] Client dependencies (npm ls --depth=0) ==
+civicsathi-client@1.0.0 <project>/client
++-- @vitejs/plugin-react@4.7.0
++-- autoprefixer@10.6.2
++-- lucide-react@0.446.0
++-- postcss@8.5.32
++-- react-dom@18.3.1
++-- react-router-dom@6.30.6
++-- react@18.3.1
++-- tailwindcss@3.4.19
+`-- vite@5.4.21
+
+
+== [3] Client production build (vite build) ==
+vite v5.4.21 building for production...
+transforming...
+ 1584 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.36 kB  gzip:  0.26 kB
+dist/assets/hero-979devud.jpg    51.82 kB
+dist/assets/index-BjQMnNsE.css   15.57 kB  gzip:  3.85 kB
+dist/assets/index-C_kUnQDy.js   201.76 kB  gzip: 64.40 kB
+ built in 6.46s
+
+== [4] Server syntax check (node --check on every file) ==
+OK  ./config/db.js
+OK  ./data/seed.js
+OK  ./middleware/auth.js
+OK  ./models/Application.js
+OK  ./models/Scheme.js
+OK  ./models/User.js
+OK  ./routes/ai.js
+OK  ./routes/applications.js
+OK  ./routes/auth.js
+OK  ./routes/schemes.js
+OK  ./server.js
+OK  ./services/ai.js
+OK  ./services/claude.js
+OK  ./services/eligibility.js
+OK  ./services/gemini.js
+
+== [5] Database seed (test DB: FerretDB, a MongoDB-compatible server; not real MongoDB) ==
+Seeded 7 schemes
+
+== [6] API startup ==
+MongoDB connected
+CivicSathi API running on port 5000
+
+== [7] API tests (test DB: FerretDB) ==
+search scholar ['PM Scholarship Scheme']
+search hindi ['PM Kisan Samman Nidhi']
+category Health ['Ayushman Bharat PM-JAY']
+eligibility ['PM Scholarship Scheme', 'Ayushman Bharat PM-JAY', 'PM Awas Yojana', 'Beti Bachao Beti Padhao', 'Skill India (PMKVY)']
+eligibility farmer 40 ['PM Kisan Samman Nidhi', 'Ayushman Bharat PM-JAY', 'PM Awas Yojana', 'Skill India (PMKVY)']
+register 201
+register bad 400
+apply no token 401
+apply 201 CS2026-2957
+apply again (409, {'error': 'You already applied. Application ID: CS2026-2957'})
+track Submitted
+track missing 404
+admin wrong key 403
+admin reject 200
+track after {'status': 'Rejected', 'rejectionReason': 'Name mismatch'}
+profile save 200
+recommend ['PM Scholarship Scheme', 'Ayushman Bharat PM-JAY', 'PM Awas Yojana', 'Beti Bachao Beti Padhao', 'Skill India (PMKVY)']
+guidance 200 stored 1. Register on the National Scholarship Portal | 2. Fill the a
+chat (AI call failed upstream) (502, {'error': 'The AI assistant is unavailable. Please try again.'})
+explain (AI call failed upstream) (502, {'error': 'The AI assistant is unavailable. Please try again.'})
+
+== Not verified in this build ==
+- Successful AI output (chat, document scan, AI guidance, rejection explanation). A provider key was configured in the sandbox, but the AI request did not succeed upstream (account/billing), so AI answers were not verified. The API now returns a generic 502 message for such failures instead of the provider's raw error.
+- Real MongoDB (tests ran on FerretDB with SQLite).
+- Voice input (needs a real browser microphone).
+
+
